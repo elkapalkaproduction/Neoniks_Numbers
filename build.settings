@@ -1,0 +1,108 @@
+settings =
+{
+  plugins = {
+    ["CoronaProvider.ads.vungle"] =
+    {
+      -- required
+      publisherId = "com.vungle",
+    },
+     -- key is the name passed to Lua's 'require()'
+        ["plugin.playhaven"] =
+        {
+            -- required
+            publisherId = "com.playhaven",
+        },
+  --[[remove this line to implement google game services
+    ["CoronaProvider.gameNetwork.google"] =
+     {
+        publisherId = "com.coronalabs",
+        supportedPlatforms = { android = true },
+     },
+    ]] --remove this line to implement google game services
+    
+   --[[remove this line to implement AdMob
+    ["CoronaProvider.ads.admob"] =
+     {
+       publisherId = "com.coronalabs",
+      },
+    ]] --remove this line to implement AdMob
+    
+  --[[remove this line to implement TapForTap
+    ["plugin.tapfortap"] =
+    {
+            -- required
+       publisherId = "com.tapfortap",
+    },
+    ]] --remove this line to implement TapForTap
+  
+  --[[remove this line to implement iAds
+    ["CoronaProvider.ads.iads"] =
+    {
+       -- required
+       publisherId = "com.coronalabs",
+    },
+    ]] --remove this line to implement iAds
+  -- --[[remove this line if you Corona version is higher than 2014.2165 or higher
+    ["facebook"] =
+    {
+        -- required
+        publisherId = "com.coronalabs",
+        supportedPlatforms = { iphone = true },
+    },
+  --  ]] --remove this line if you Corona version is higher than 2014.2165 or higher
+  },
+	orientation =
+	{
+		default = "portrait",
+		supported = { "portrait" }
+	},
+	android =
+	{
+    googlePlayGamesAppId = "XXXXXXXX",  --insert your app id number for google game services
+		usesPermissions =
+		{
+      "com.android.vending.BILLING", --remove this line if you don't use iAP
+			"android.permission.INTERNET",
+      "android.permission.ACCESS_NETWORK_STATE",
+     --[[remove this line if you use admob and not chartboost
+      "android.permission.READ_PHONE_STATE" 
+      ]]--remove this line if you use admob and not chartboost
+		},
+	},
+	iphone =
+	{
+		plist =
+		{
+			CFBundleIconFile = "Icon.png",
+			CFBundleIconFiles =
+			{
+                "Icon.png", 
+                "Icon@2x.png", 
+                "Icon-60.png",
+                "Icon-60@2x.png",
+                "Icon-72.png", 
+                "Icon-72@2x.png",
+                "Icon-76.png",
+                "Icon-76@2x.png", 
+                "Icon-Small.png", 
+                "Icon-Small@2x.png",
+                "Icon-Small-40.png",
+                "Icon-Small-40@2x.png",
+                "Icon-Small-50.png", 
+                "Icon-Small-50@2x.png", 
+			},
+			UIApplicationExitsOnSuspend = false,	-- must be false for single sign-on to work
+			FacebookAppID = "XXXXXXXXX",	-- replace XXXXXXXXX with your facebook appId
+
+			CFBundleURLTypes =
+			{
+				{
+					CFBundleURLSchemes =
+					{
+						"fbXXXXXXXXX",	-- replace XXXXXXXXX with your facebook appId, make sure that you leave fb in front of it				
+					}
+				}
+			}
+		}
+	}
+}
