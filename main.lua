@@ -1,4 +1,4 @@
-require "CiderDebugger";display.setStatusBar(display.HiddenStatusBar);
+display.setStatusBar(display.HiddenStatusBar);
 
 local setupFile = require "setupFile";
 local fpsLib = require "fpsLib";
