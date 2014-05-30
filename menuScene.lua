@@ -67,8 +67,8 @@ function scene:createScene( event )
     self:setFillColor(1, 1, 1);
     self.xScale, self.yScale = 1, 1;
     _G.activeMode = "guesstime";
-    help.generateArrayWithNumber(5);
-    storyboard.gotoScene("gameScene");
+    help.generateArrayWithNumber(2);
+    storyboard.gotoScene("rookiePlayer");
   end
   
   

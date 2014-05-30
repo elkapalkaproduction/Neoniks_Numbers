@@ -14,9 +14,6 @@ local timeInterval = 1000;
 
 local adsLib = require "adsLib";
 
-
-local langId;
-
 local totalWidth = _G.totalWidth;
 local totalHeight = _G.totalHeight;
 local leftSide = _G.leftSide;
@@ -31,10 +28,6 @@ local help = require "help";
 
 function scene:createScene( event )
 	local group = scene.view;
- langId = "IMG/page2/";
-  if (system.getPreference( "ui", "language") == "ru") then
-    langId = "IMG/page2/rus-";
-  end
   local scrollView = widget.newScrollView {
   left = leftSide,
   top = topSide,

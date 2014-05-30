@@ -113,7 +113,7 @@ function scene:createScene( event )
    end
   
   local retryButton = ragdogLib.newSimpleButton(group, help.localizableImage("play"), help.sizes(110,38));
-  retryButton.x, retryButton.y = shareButton.x - shareButton.width, shareButton.y;--centerX-60, bottomSide-76;
+  retryButton.x, retryButton.y = shareButton.x - shareButton.width, shareButton.y;
   function retryButton:touchBegan()
     self:setFillColor(.5, .5, .5);
     self.xScale, self.yScale = .9, .9;

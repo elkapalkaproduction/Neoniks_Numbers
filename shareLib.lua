@@ -2,14 +2,26 @@ local ragdogLib = require "ragdogLib";
 local twitterHelper = require "shareLib.twitterHelper";
 local facebookHelper = require "shareLib.facebookHelper";
 
+local help = require "help";
+
 local shareLib = {};
 
 local totalWidth = _G.totalWidth;
-local totalHeight = totalHeight;
+local totalHeight = _G.totalHeight;
 
 local canEmail = native.canShowPopup("mail");
 local canSMS = native.canShowPopup("sms");
 local facebookShare, twitterShare, emailShare, smsShare;
+
+local totalWidth = _G.totalWidth;
+local totalHeight = _G.totalHeight;
+local leftSide = _G.leftSide;
+local rightSide = _G.rightSide;
+local topSide = _G.topSide;
+local bottomSide = _G.bottomSide;
+local centerX = display.contentCenterX;
+local centerY = display.contentCenterY;
+
 
 local shareFunctions = {
   ["facebook"] = facebookHelper.postOnUserWall,
@@ -51,10 +63,15 @@ shareLib.init = function(message, replaceData)
   
   local buttonHolder = display.newGroup();
   group:insert(buttonHolder);
+  buttonHolder.anchorX = touchBlocker.x;
   
-  local bg = display.newImageRect(buttonHolder, "IMG/shareIMG/sharepop.png", 245, 229);
+  local bg = display.newImageRect(group, help.imagePath("screen_score"), help.sizes(384,410));
+  bg.x, bg.y = centerX, topSide + bg.height / 2;
+
+  local shareTitle = display.newImageRect(group, help.localizableImage("share_title"), help.sizes(213,57));
+  shareTitle.x, shareTitle.y = centerX, topSide + 0.01 * totalWidth + shareTitle.height / 2;
   
-  local facebookButton = ragdogLib.newSimpleButton(buttonHolder, "IMG/shareIMG/fb.png", 62, 63);
+  local facebookButton = ragdogLib.newSimpleButton(group, help.imagePath("facebook"), help.sizes(64,64));
   facebookButton.x, facebookButton.y = bg.x-50, bg.y-50;
   function facebookButton:touchBegan()
     self.xScale, self.yScale = .9, .9;
@@ -66,7 +83,7 @@ shareLib.init = function(message, replaceData)
     shareLib.shareMessage("facebook", message, replaceData);
   end
   
-  local twitterButton = ragdogLib.newSimpleButton(buttonHolder, "IMG/shareIMG/twit.png", 62, 63);
+  local twitterButton = ragdogLib.newSimpleButton(group, help.imagePath("twitter"), help.sizes(64,64));
   twitterButton.x, twitterButton.y = bg.x+50, bg.y-50;
   function twitterButton:touchBegan()
     self.xScale, self.yScale = .9, .9;
@@ -78,7 +95,7 @@ shareLib.init = function(message, replaceData)
     shareLib.shareMessage("twitter", message, replaceData);
   end
   
-  local emailButton = ragdogLib.newSimpleButton(buttonHolder, "IMG/shareIMG/email.png", 62, 63);
+  local emailButton = ragdogLib.newSimpleButton(group, help.imagePath("emai"), help.sizes(64,64));
   emailButton.x, emailButton.y = bg.x-50, bg.y+50;
   if canEmail then
     function emailButton:touchBegan()
@@ -94,7 +111,7 @@ shareLib.init = function(message, replaceData)
     emailButton:setFillColor(.7, .7, .7);
   end
   
-  local smsButton = ragdogLib.newSimpleButton(buttonHolder, "IMG/shareIMG/sms.png", 62, 63);
+  local smsButton = ragdogLib.newSimpleButton(group, help.imagePath("cloud"), help.sizes(64,64));
   smsButton.x, smsButton.y = bg.x+50, bg.y+50;
   if canSMS then
     function smsButton:touchBegan()
@@ -112,8 +129,8 @@ shareLib.init = function(message, replaceData)
   
   buttonHolder.x, buttonHolder.y = touchBlocker.x, touchBlocker.y-50;
   
-  local backButton = ragdogLib.newSimpleButton(buttonHolder, "IMG/back.png", 59, 36);
-  backButton.x, backButton.y = bg.x, bg.y+160;
+  local backButton = ragdogLib.newSimpleButton(group, help.localizableImage("back"), help.sizes(87,38));
+  backButton.x, backButton.y = bg.x, bg.y+bg.height / 2 + backButton.height / 2;
   function backButton:touchBegan()
     self:setFillColor(.5, .5, .5);
     self.xScale, self.yScale = .9, .9;

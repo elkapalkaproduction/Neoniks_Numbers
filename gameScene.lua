@@ -119,8 +119,10 @@ createTutorial = function(group)
   elseif currentMode == "endurance" then
     tutTextPath, persW, persH = "tut_pro_pilot", 318, 253;
   elseif currentMode == "guesstime" then
-    tutTextPath, persW, persH = "tut_rookie", 244, 245;
-  end
+      tutTextPath, persW, persH = "tut_rookie", 244, 245;
+    tutGroup:removeSelf();
+    activateCountDown(group);
+end
   
   local tutTextImage = display.newImageRect(tutGroup, help.localizableImage("text_"..tutTextPath), help.sizes(306,90));
   tutTextImage.x, tutTextImage.y = centerX, topSide + 0.3 * bgTop.height + tutTextImage.height / 2;
@@ -130,10 +132,10 @@ createTutorial = function(group)
   
   local tutPersImage = display.newImageRect(tutGroup, help.imagePath("pers_"..tutTextPath), help.sizes(persW,persH));
   tutPersImage.x, tutPersImage.y = leftSide + tutPersImage.width / 2, bottomSide - tutPersImage.height / 2;
-  
+    
   
   local nextButton = ragdogLib.newSimpleButton(tutGroup, help.localizableImage("play"), help.sizes(110, 38));
-  nextButton.x, nextButton.y = rightSide - nextButton.width / 3, bottomSide - nextButton.height / 1.5;
+  nextButton.x, nextButton.y = rightSide - nextButton.width / 2, bottomSide - nextButton.height / 1.5;
   function nextButton:touchBegan()
     self:setFillColor(.5, .5, .5);
     self.xScale, self.yScale = .9, .9;
@@ -382,7 +384,7 @@ createTiles = function(group)
           self[i]:setSequence("white");
           local randomCoeficient;
           repeat
-          randomCoeficient = mRandom(1, 10);
+          randomCoeficient = mRandom(x + self[i].position*5, x + self[i].position*5 + 5);
           randomCoeficient = math.abs(x - randomCoeficient);
           until (randomCoeficient ~= x);
             local posX = (0.125+0.25*(self[i].position-1))*totalWidth;
