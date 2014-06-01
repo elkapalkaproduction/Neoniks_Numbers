@@ -36,9 +36,9 @@ _G.buttonSFX = audio.loadSound("SFX/wooshSFX.mp3");
 _G.defaultImagesPath = "Images/";
 _G.defaultImageExtension = ".png";
 
-_G.numberOfOperation = 8;
-_G.limitMin = 2;
-_G.limitMax = 9;
+_G.numberOfOperation = 10;
+_G.limitMin = 1;
+_G.limitMax = 10;
 
 
 _G.siteEng = "http://www.neoniks.com";
