@@ -42,6 +42,7 @@ local currentTime;
 local startTime;
 local currentScore;
 
+local lastOpened;
 
 local delayBeforeShowingGameOver = 60; 
 
@@ -53,7 +54,6 @@ local scrollSpeed = 15;
 local tilesSheet;
 local activeRowTile;
 local shoesPool;
-
 
 local mCeil, mRandom = math.ceil, math.random;
 
@@ -197,6 +197,7 @@ createHud = function(group)
    local topImage = display.newImageRect(group, help.imagePath("top"), help.sizes(384, 106));
   topImage.x, topImage.y = leftSide + topImage.width / 2, topSide + topImage.height / 2;
   
+  lastOpened = 0;
   
   local timeText = display.newEmbossedText(group, currentTime, leftSide + 0.85 * totalWidth + 20, topSide + 0.1 * topImage.height, native.systemFont, 20);
   timeText:setFillColor(1, 1, 1);
@@ -225,15 +226,26 @@ createHud = function(group)
         needsZero = needsZero+1;
       end
     end
+
     currentTime = currentTime-(currentTime%1);
     currentTime = currentTime*.01;
-    
+   if lastOpened + _G.timeToHide < currentTime then
+      for i=1,4 do
+        if activeRowTile[i].sequence ~= "yellow" and activeRowTile[i].sequence ~= "black" then
+       activeRowTile[i]:setSequence("yellow");
+       lastOpened = currentTime;
+       break;
+       end
+    end
+  
+   end
     if needsZero >= 2 then
       currentTime = currentTime..".";
     end
     for i = 1, needsZero do
       currentTime = currentTime.."0";
     end
+  
     self:setText(currentTime);
   end
   Runtime:addEventListener("enterFrame", timeText);
@@ -296,6 +308,7 @@ createTiles = function(group)
             if activeRowTile[self.checkPosition].sequence == "black" then
             audio.play(stepSFX, {channel = audio.findFreeChannel()});
             currentScore = currentScore+1;
+            lastOpened = currentTime;
             local shoe;
             if self.checkPosition > 2 then
               shoe = shoesPool[2][#shoesPool[2]];
