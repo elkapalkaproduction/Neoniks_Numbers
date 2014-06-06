@@ -129,8 +129,12 @@ end
   
   local tutClassIcon = display.newImageRect(tutGroup, help.localizableImage(tutTextPath), help.sizes(84,62));
   tutClassIcon.x, tutClassIcon.y = leftSide + 0.185 * totalWidth + tutClassIcon.width / 2, topSide + 0.115 * bgTop.height + tutClassIcon.height / 2;
-  
-  local tutPersImage = display.newImageRect(tutGroup, help.imagePath("pers_"..tutTextPath), help.sizes(persW,persH));
+  local width, height =  help.sizes(persW,persH);
+  if (totalHeight == 568) then
+    width, height = width * 1.3, height * 1.3
+    print("vasea "..width.."fads"..height);
+  end
+  local tutPersImage = display.newImageRect(tutGroup, help.imagePath("pers_"..tutTextPath), width, height);
   tutPersImage.x, tutPersImage.y = leftSide + tutPersImage.width / 2, bottomSide - tutPersImage.height / 2;
     
   
@@ -231,8 +235,9 @@ createHud = function(group)
     currentTime = currentTime*.01;
    if lastOpened + _G.timeToHide < currentTime then
       for i=1,4 do
-        if activeRowTile[i].sequence ~= "yellow" and activeRowTile[i].sequence ~= "black" then
-       activeRowTile[i]:setSequence("yellow");
+        if activeRowTile[i].sequence ~= "broken" and activeRowTile[i].sequence ~= "black" then
+          audio.play(_G.dissapearSound, {channel = audio.findFreeChannel()});
+       activeRowTile[i]:setSequence("broken");
        lastOpened = currentTime;
        break;
        end

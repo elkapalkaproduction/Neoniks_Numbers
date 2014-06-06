@@ -131,7 +131,7 @@ function scene:createScene( event )
         help.generateArrayWithNumber(x);
         storyboard.gotoScene("gameScene");
     elseif currentMode == "guesstime" then
-        storyboard.gotoScene("gameScene");
+      storyboard.gotoScene("rookiePlayer");
     end
   end
   

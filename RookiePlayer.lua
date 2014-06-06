@@ -49,8 +49,12 @@ function scene:createScene( event )
   
   local tutClassIcon = display.newImageRect(group, help.localizableImage(tutTextPath), help.sizes(84,62));
   tutClassIcon.x, tutClassIcon.y = leftSide + 0.185 * totalWidth + tutClassIcon.width / 2, topSide + 0.115 * bgTop.height + tutClassIcon.height / 2;
-  
-  local tutPersImage = display.newImageRect(group, help.imagePath("pers_"..tutTextPath), help.sizes(persW,persH));
+  local width, height =  help.sizes(persW,persH);
+  if (totalHeight == 568) then
+    width, height = width * 1.3, height * 1.3
+    print("vasea "..width.."fads"..height);
+  end
+  local tutPersImage = display.newImageRect(group, help.imagePath("pers_"..tutTextPath), width, height);
   tutPersImage.x, tutPersImage.y = leftSide + tutPersImage.width / 2, bottomSide - tutPersImage.height / 2;
 
   local button2 = ragdogLib.newSimpleButton(group, help.imagePath("numbers/2"), help.sizes(35, 40));
@@ -61,14 +65,16 @@ function scene:createScene( event )
   local button7 = ragdogLib.newSimpleButton(group, help.imagePath("numbers/7"), help.sizes(35, 40));
   local button8 = ragdogLib.newSimpleButton(group, help.imagePath("numbers/8"), help.sizes(35, 40));
   local button9 = ragdogLib.newSimpleButton(group, help.imagePath("numbers/9"), help.sizes(35, 40));
-  button2.x, button2.y = 0.09 * totalWidth + button2.width / 2 , 0.33 * totalHeight + button2.height / 2;
-  button3.x, button3.y = button2.x + button2.width, button2.y;
-  button4.x, button4.y = button3.x + button3.width, button3.y;
-  button5.x, button5.y = button4.x + button4.width, button4.y;
-  button6.x, button6.y = button5.x + button5.width, button5.y;
-  button7.x, button7.y = button6.x + button6.width, button6.y;
-  button8.x, button8.y = button7.x + button7.width, button7.y;
-  button9.x, button9.y = button8.x + button8.width, button8.y;
+
+
+  button2.x, button2.y = centerX - 7 * button2.width / 2 , bgTop.y + button2.height / 2;
+  button3.x, button3.y = centerX - 5 * button3.width / 2, button2.y;
+  button4.x, button4.y = centerX - 3 * button4.width / 2, button3.y;
+  button5.x, button5.y = centerX - button5.width / 2, button4.y;
+  button6.x, button6.y = centerX + button6.width / 2, button5.y;
+  button7.x, button7.y = centerX + 3 * button7.width / 2, button6.y;
+  button8.x, button8.y = centerX + 5 * button8.width / 2, button7.y;
+  button9.x, button9.y = centerX + 7 * button9.width / 2, button8.y;
   local alphaMic = 0.5;
   
     button2.alpha = alphaMic;
