@@ -24,6 +24,7 @@ local bottomSide = _G.bottomSide;
 local centerX = display.contentCenterX;
 local centerY = display.contentCenterY;
 
+local offsetDown = _G.offsetDown;
 local createTiles;
 local createHud;
 local createShoes;
@@ -118,6 +119,8 @@ createTutorial = function(group)
     tutTextPath, persW, persH = "tut_ace", 369, 343;
   elseif currentMode == "endurance" then
     tutTextPath, persW, persH = "tut_pro_pilot", 318, 253;
+     tutGroup:removeSelf();
+    activateCountDown(group);
   elseif currentMode == "guesstime" then
       tutTextPath, persW, persH = "tut_rookie", 244, 245;
     tutGroup:removeSelf();
@@ -132,7 +135,6 @@ end
   local width, height =  help.sizes(persW,persH);
   if (totalHeight == 568) then
     width, height = width * 1.3, height * 1.3
-    print("vasea "..width.."fads"..height);
   end
   local tutPersImage = display.newImageRect(tutGroup, help.imagePath("pers_"..tutTextPath), width, height);
   tutPersImage.x, tutPersImage.y = leftSide + tutPersImage.width / 2, bottomSide - tutPersImage.height / 2;
@@ -198,19 +200,19 @@ createHud = function(group)
     currentTime = 0;
     currentScore = 0;
     timeToAdd = 1/60;
-   local topImage = display.newImageRect(group, help.imagePath("top"), help.sizes(384, 106));
+   local topImage = display.newImageRect(group, help.imagePath("top-1"), help.sizes(384, 190));
   topImage.x, topImage.y = leftSide + topImage.width / 2, topSide + topImage.height / 2;
   
   lastOpened = 0;
   
-  local timeText = display.newEmbossedText(group, currentTime, leftSide + 0.85 * totalWidth + 20, topSide + 0.1 * topImage.height, native.systemFont, 20);
-  timeText:setFillColor(1, 1, 1);
+  local timeText = display.newEmbossedText(group, currentTime, centerX - 0.15 * totalWidth, topSide + topImage.height / 5, native.systemFont, 30);
+  timeText:setFillColor(2/255, 29/255, 58/255);
   
-  local scoreText = display.newEmbossedText(group, currentScore, leftSide + 0.125 * totalWidth + 12.5, topSide + 0.1 * topImage.height + 12.5, native.systemFont, 20);
+  local scoreText = display.newEmbossedText(group, currentScore, rightSide - (0.21 * totalWidth), topSide + topImage.height / 6, native.systemFont, 40);
   scoreText:setFillColor(1, 1, 1);
   
-  operationText = display.newEmbossedText(group, currentTime, centerX, topSide + topImage.height / 2 - 10, native.systemFont, 30);
-  operationText:setFillColor(0,0,0);
+  operationText = display.newEmbossedText(group, currentTime, centerX, topImage.y + topImage.height / 4, native.systemFont, 50);
+  operationText:setFillColor(1,1,1);
   function timeText:enterFrame()
     if gameLayer.gameOver or not startTime then
       return;
@@ -245,7 +247,7 @@ createHud = function(group)
   
    end
     if needsZero >= 2 then
-      currentTime = currentTime..".";
+      currentTime = currentTime..":";
     end
     for i = 1, needsZero do
       currentTime = currentTime.."0";
@@ -286,7 +288,7 @@ createTiles = function(group)
   local firstTile = (totalColumns-4)*.5+1;
   local lastTile = firstTile+3;
   
-  local lastTiles = {contentHeight = 0, y = topSide-40};
+  local lastTiles = {contentHeight = 0, y = topSide - offsetDown};
   
   for i = 1, totalRows do
     local tileGroup = display.newGroup();

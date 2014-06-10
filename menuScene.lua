@@ -85,7 +85,7 @@ function scene:createScene( event )
     _G.activeMode = "endurance";
     local x = mRandom(limitMin, limitMax);
     help.generateArrayWithNumber(x);
-    storyboard.gotoScene("gameScene");
+    storyboard.gotoScene("rookiePlayer");
   end
   
   local timeattackButton = ragdogLib.newSimpleButton(group, help.localizableImage("ace"), help.sizes(149, 61));

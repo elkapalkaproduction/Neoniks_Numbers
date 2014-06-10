@@ -26,6 +26,12 @@ local centerY = display.contentCenterY;
 local centerX = display.contentCenterX;
 local centerY = display.contentCenterY;  
 
+local limitMin = _G.limitMin;
+local limitMax = _G.limitMax;
+local mRandom = math.random;
+
+local currentMode;
+
 function scene:createScene( event )
 	local group = scene.view;
   local userSelectNumber = false;
@@ -41,8 +47,16 @@ function scene:createScene( event )
   
   local bgTop = display.newImageRect(group, help.imagePath("tut_background_top"), help.sizes(384, 330));
   bgTop.x, bgTop.y = centerX, topSide + bgTop.height / 2;
-  
-    local tutTextPath, persW, persH = "tut_rookie", 244, 245;
+    currentMode = _G.activeMode;
+
+  local tutTextPath, persW, persH;
+  if currentMode == "timeattack" then
+    tutTextPath, persW, persH = "tut_ace", 369, 343;
+  elseif currentMode == "endurance" then
+    tutTextPath, persW, persH = "tut_pro_pilot", 318, 253;
+  elseif currentMode == "guesstime" then
+    tutTextPath, persW, persH = "tut_rookie", 244, 245;
+  end
 
   local tutTextImage = display.newImageRect(group, help.localizableImage("text_"..tutTextPath), help.sizes(306,90));
   tutTextImage.x, tutTextImage.y = centerX, topSide + 0.3 * bgTop.height + tutTextImage.height / 2;
@@ -52,7 +66,6 @@ function scene:createScene( event )
   local width, height =  help.sizes(persW,persH);
   if (totalHeight == 568) then
     width, height = width * 1.3, height * 1.3
-    print("vasea "..width.."fads"..height);
   end
   local tutPersImage = display.newImageRect(group, help.imagePath("pers_"..tutTextPath), width, height);
   tutPersImage.x, tutPersImage.y = leftSide + tutPersImage.width / 2, bottomSide - tutPersImage.height / 2;
@@ -76,7 +89,7 @@ function scene:createScene( event )
   button8.x, button8.y = centerX + 5 * button8.width / 2, button7.y;
   button9.x, button9.y = centerX + 7 * button9.width / 2, button8.y;
   local alphaMic = 0.5;
-  
+  local function setAlphaZero()
     button2.alpha = alphaMic;
     button3.alpha = alphaMic;
     button4.alpha = alphaMic;
@@ -85,7 +98,9 @@ function scene:createScene( event )
     button7.alpha = alphaMic;
     button8.alpha = alphaMic;
     button9.alpha = alphaMic;
-    
+  end
+  setAlphaZero();
+  if currentMode == "guesstime" then 
   function button2:touchBegan()
     self:setFillColor(.5, .5, .5);
     self.xScale, self.yScale = .9, .9;
@@ -94,14 +109,8 @@ function scene:createScene( event )
     audio.play(buttonSFX, {channel = audio.findFreeChannel()});
     self:setFillColor(1, 1, 1);
     self.xScale, self.yScale = 1, 1;
+    setAlphaZero();
     button2.alpha = 1;
-    button3.alpha = alphaMic;
-    button4.alpha = alphaMic;
-    button5.alpha = alphaMic;
-    button6.alpha = alphaMic;
-    button7.alpha = alphaMic;
-    button8.alpha = alphaMic;
-    button9.alpha = alphaMic;
     help.generateArrayWithNumber(2);
     userSelectNumber = true
   end 
@@ -115,14 +124,8 @@ function scene:createScene( event )
     audio.play(buttonSFX, {channel = audio.findFreeChannel()});
     self:setFillColor(1, 1, 1);
     self.xScale, self.yScale = 1, 1;
-    button2.alpha = alphaMic;
+    setAlphaZero();
     button3.alpha = 1;
-    button4.alpha = alphaMic;
-    button5.alpha = alphaMic;
-    button6.alpha = alphaMic;
-    button7.alpha = alphaMic;
-    button8.alpha = alphaMic;
-    button9.alpha = alphaMic;
     help.generateArrayWithNumber(3);
     userSelectNumber = true
   end  
@@ -136,14 +139,8 @@ function scene:createScene( event )
     audio.play(buttonSFX, {channel = audio.findFreeChannel()});
     self:setFillColor(1, 1, 1);
     self.xScale, self.yScale = 1, 1;
-    button2.alpha = alphaMic;
-    button3.alpha = alphaMic;
+    setAlphaZero();
     button4.alpha = 1;
-    button5.alpha = alphaMic;
-    button6.alpha = alphaMic;
-    button7.alpha = alphaMic;
-    button8.alpha = alphaMic;
-    button9.alpha = alphaMic;
     help.generateArrayWithNumber(4);
     userSelectNumber = true
   end  
@@ -157,14 +154,8 @@ function scene:createScene( event )
     audio.play(buttonSFX, {channel = audio.findFreeChannel()});
     self:setFillColor(1, 1, 1);
     self.xScale, self.yScale = 1, 1;
-    button2.alpha = alphaMic;
-    button3.alpha = alphaMic;
-    button4.alpha = alphaMic;
+    setAlphaZero();
     button5.alpha = 1;
-    button6.alpha = alphaMic;
-    button7.alpha = alphaMic;
-    button8.alpha = alphaMic;
-    button9.alpha = alphaMic;
     help.generateArrayWithNumber(5);
     userSelectNumber = true
   end  
@@ -178,14 +169,8 @@ function scene:createScene( event )
     audio.play(buttonSFX, {channel = audio.findFreeChannel()});
     self:setFillColor(1, 1, 1);
     self.xScale, self.yScale = 1, 1;
-    button2.alpha = alphaMic;
-    button3.alpha = alphaMic;
-    button4.alpha = alphaMic;
-    button5.alpha = alphaMic;
+    setAlphaZero();
     button6.alpha = 1;
-    button7.alpha = alphaMic;
-    button8.alpha = alphaMic;
-    button9.alpha = alphaMic;
     help.generateArrayWithNumber(6);
     userSelectNumber = true
   end  
@@ -199,14 +184,8 @@ function scene:createScene( event )
     audio.play(buttonSFX, {channel = audio.findFreeChannel()});
     self:setFillColor(1, 1, 1);
     self.xScale, self.yScale = 1, 1;
-    button2.alpha = alphaMic;
-    button3.alpha = alphaMic;
-    button4.alpha = alphaMic;
-    button5.alpha = alphaMic;
-    button6.alpha = alphaMic;
+    setAlphaZero();
     button7.alpha = 1;
-    button8.alpha = alphaMic;
-    button9.alpha = alphaMic;
     help.generateArrayWithNumber(7);
     userSelectNumber = true
   end 
@@ -220,14 +199,8 @@ function scene:createScene( event )
     audio.play(buttonSFX, {channel = audio.findFreeChannel()});
     self:setFillColor(1, 1, 1);
     self.xScale, self.yScale = 1, 1;
-    button2.alpha = alphaMic;
-    button3.alpha = alphaMic;
-    button4.alpha = alphaMic;
-    button5.alpha = alphaMic;
-    button6.alpha = alphaMic;
-    button7.alpha = alphaMic;
+    setAlphaZero();
     button8.alpha = 1;
-    button9.alpha = alphaMic;
     help.generateArrayWithNumber(8);
     userSelectNumber = true
   end 
@@ -241,18 +214,31 @@ function scene:createScene( event )
     audio.play(buttonSFX, {channel = audio.findFreeChannel()});
     self:setFillColor(1, 1, 1);
     self.xScale, self.yScale = 1, 1;
-    button2.alpha = alphaMic;
-    button3.alpha = alphaMic;
-    button4.alpha = alphaMic;
-    button5.alpha = alphaMic;
-    button6.alpha = alphaMic;
-    button7.alpha = alphaMic;
-    button8.alpha = alphaMic;
+    setAlphaZero();
     button9.alpha = 1;
     help.generateArrayWithNumber(9);
     userSelectNumber = true
   end
-  
+  elseif currentMode == "endurance" then
+  x = _G.coeficient;
+    if x == 2 then
+      button2.alpha = 1;
+    elseif x == 3 then
+      button3.alpha = 1;  
+    elseif x == 4 then
+      button4.alpha = 1;  
+    elseif x == 5 then
+      button5.alpha = 1;
+    elseif x == 6 then
+      button6.alpha = 1;  
+    elseif x == 7 then
+      button7.alpha = 1; 
+    elseif x == 8 then
+      button8.alpha = 1;  
+    elseif x == 9 then
+      button9.alpha = 1;
+    end
+end
   local nextButton = ragdogLib.newSimpleButton(group, help.localizableImage("play"), help.sizes(110, 38));
   nextButton.x, nextButton.y = rightSide - nextButton.width / 2, bottomSide - nextButton.height / 1.5;
   function nextButton:touchBegan()
@@ -266,6 +252,9 @@ function scene:createScene( event )
     if userSelectNumber then
         storyboard.gotoScene("gameScene");
     end
+    if currentMode == "endurance" then
+      storyboard.gotoScene("gameScene");
+  end
   end
   
   local backButton = ragdogLib.newSimpleButton(group, help.localizableImage("menu"), help.sizes(110, 38));
