@@ -127,7 +127,7 @@ function scene:createScene( event )
         help.generateArrayWithNumber(_G.coeficient);
         storyboard.gotoScene("gameScene");
     elseif currentMode == "endurance" then
-        local x = mRandom(limitMin, limitMax);
+        local x = mRandom(2, 9);
         help.generateArrayWithNumber(x);
         storyboard.gotoScene("rookiePlayer");
     elseif currentMode == "guesstime" then

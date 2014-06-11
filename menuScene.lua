@@ -83,7 +83,7 @@ function scene:createScene( event )
     self:setFillColor(1, 1, 1);
     self.xScale, self.yScale = 1, 1;
     _G.activeMode = "endurance";
-    local x = mRandom(limitMin, limitMax);
+    local x = mRandom(2, 9);
     help.generateArrayWithNumber(x);
     storyboard.gotoScene("rookiePlayer");
   end

@@ -3,8 +3,8 @@ local revmob, chartboost, ads, tapfortap;
 local revMobAndroidAppId = "537d1092ee7f67f1625d621f";
 local revMobIosAppId = "53726c04d05eac4f34ea92fd";
 
-local chartBoostAppId = "53726b8c1873da7f2ac823bb";
-local chartBoostAppSignature = "9d5fab837feda532654ac521134916acb40150af";
+local chartBoostAppId = "538579a31873da2803b7aad3";
+local chartBoostAppSignature = "c450bcb57bf3c8c5ed43f4adcd4a8fd79c4d7d07";
 local chartBoostAppVersion = "1.0";
 
 local adMobAppIdBanner = "Set your adMob Ad ID for banner here";

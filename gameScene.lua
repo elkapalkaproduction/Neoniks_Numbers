@@ -120,11 +120,13 @@ createTutorial = function(group)
   elseif currentMode == "endurance" then
     tutTextPath, persW, persH = "tut_pro_pilot", 318, 253;
      tutGroup:removeSelf();
-    activateCountDown(group);
+     startTime = os.time()
+    -- activateCountDown(group);
   elseif currentMode == "guesstime" then
       tutTextPath, persW, persH = "tut_rookie", 244, 245;
     tutGroup:removeSelf();
-    activateCountDown(group);
+    startTime = os.time()
+    -- activateCountDown(group);
 end
   
   local tutTextImage = display.newImageRect(tutGroup, help.localizableImage("text_"..tutTextPath), help.sizes(306,90));
@@ -151,7 +153,8 @@ end
     self:setFillColor(1, 1, 1);
     self.xScale, self.yScale = 1, 1;
     tutGroup:removeSelf();
-    activateCountDown(group);
+    startTime = os.time()
+    -- activateCountDown(group);
   end
   
   local backButton = ragdogLib.newSimpleButton(tutGroup, help.localizableImage("menu"), help.sizes(110, 38));
@@ -200,18 +203,18 @@ createHud = function(group)
     currentTime = 0;
     currentScore = 0;
     timeToAdd = 1/60;
-   local topImage = display.newImageRect(group, help.imagePath("top-1"), help.sizes(384, 190));
+   local topImage = display.newImageRect(group, help.imagePath("top-1"), help.sizes(384, 119));
   topImage.x, topImage.y = leftSide + topImage.width / 2, topSide + topImage.height / 2;
   
   lastOpened = 0;
   
-  local timeText = display.newEmbossedText(group, currentTime, centerX - 0.15 * totalWidth, topSide + topImage.height / 5, native.systemFont, 30);
+  local timeText = display.newEmbossedText(group, currentTime, leftSide + 0.23 * totalWidth, topSide + topImage.height / 8, native.systemFont, 20);
   timeText:setFillColor(2/255, 29/255, 58/255);
   
-  local scoreText = display.newEmbossedText(group, currentScore, rightSide - (0.21 * totalWidth), topSide + topImage.height / 6, native.systemFont, 40);
+  local scoreText = display.newEmbossedText(group, currentScore, rightSide - (0.19 * totalWidth), topSide + topImage.height / 4, native.systemFont, 30);
   scoreText:setFillColor(1, 1, 1);
   
-  operationText = display.newEmbossedText(group, currentTime, centerX, topImage.y + topImage.height / 4, native.systemFont, 50);
+  operationText = display.newEmbossedText(group, currentTime, centerX, topImage.y + topImage.height / 7, native.systemFont, 45);
   operationText:setFillColor(1,1,1);
   function timeText:enterFrame()
     if gameLayer.gameOver or not startTime then

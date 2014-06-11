@@ -43,7 +43,7 @@ _G.numberOfOperation = 10;
 _G.limitMin = 1;
 _G.limitMax = 10;
 
-_G.offsetDown = 40;
+_G.offsetDown = 0;
 
 _G.siteEng = "http://www.neoniks.com";
 _G.siteRus = "http://www.neoniki.ru";
