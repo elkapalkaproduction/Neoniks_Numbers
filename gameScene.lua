@@ -216,6 +216,9 @@ createHud = function(group)
   
   operationText = display.newEmbossedText(group, currentTime, centerX, topImage.y + topImage.height / 7, native.systemFont, 45);
   operationText:setFillColor(1,1,1);
+
+  local startHere = display.newImageRect(group, help.localizableImage("start"), help.sizes(155, 89));
+  startHere.x, startHere.y = centerX, bottomSide - startHere.height / 2;
   function timeText:enterFrame()
     if gameLayer.gameOver or not startTime then
       return;
@@ -225,6 +228,9 @@ createHud = function(group)
     local secondNumber = _G.randomNumber["second"][currentScore + 1];
     operationText:setText(firstNumber.." x "..secondNumber.." = ?");
     scoreText:setText(currentScore);
+    if (currentScore > 0) then
+      startHere.y = totalHeight * 2;
+      end
     currentTime = currentTime+timeToAdd*FPS;
     local currentTime = currentTime*100;
     currentTime = currentTime-(currentTime%1);
