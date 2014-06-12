@@ -36,7 +36,7 @@ _G.buttonSFX = audio.loadSound("SFX/wooshSFX.mp3");
 _G.defaultImagesPath = "Images/";
 _G.defaultImageExtension = ".png";
 
-_G.timeToHide = 1;--in seconds;
+_G.timeToHide = 5;--in seconds;
 _G.dissapearSound = "";
 
 _G.numberOfOperation = 10;
