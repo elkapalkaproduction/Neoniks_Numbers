@@ -78,16 +78,16 @@ function scene:createScene( event )
     local leaderboardTable = ragdogLib.getSaveValue("leaderboard"..currentMode) or {};
     if #leaderboardTable > 0 then
       for i = 1, #leaderboardTable do
-          local name = display.newText(group, i..". "..leaderboardTable[i].name, 0, 0, native.systemFont, 18);
+          local name = display.newText(highscoreGroup, i..". "..leaderboardTable[i].name, 0, 0, native.systemFont, 18);
           name.x, name.y = bg.contentBounds.xMin+50+name.contentWidth*.5, topSide+70+0.01*totalHeight+(i*20);
           name:setFillColor(1, 1, 1);
           
-          local score = display.newText(group, leaderboardTable[i].score, 0, 0, native.systemFont, 18);
+          local score = display.newText(highscoreGroup, leaderboardTable[i].score, 0, 0, native.systemFont, 18);
           score.x, score.y = bg.contentBounds.xMax-50-score.contentWidth*.5, topSide+70+0.01*totalHeight+(i*20);
           score:setFillColor(1, 1, 1);
       end
     else
-      local warning = display.newText(group, "There are no saved highscores yet!", 0, 0, native.systemFont, 16);
+      local warning = display.newText(highscoreGroup, "There are no saved highscores yet!", 0, 0, native.systemFont, 16);
       warning.x, warning.y = bg.x, bg.y-30;
       warning:setFillColor(0, 0, 0);
     end
