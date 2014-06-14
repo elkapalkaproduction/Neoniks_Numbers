@@ -7,12 +7,12 @@ local networksLib = require "networksLib";
 
 _G.twitterConsumerKey = "Your Twitter Consumer Key";
 _G.twitterSecretKey = "Your Twitter Secret Key";
-_G.facebookAPPID = "Your Facebook App ID";
+_G.facebookAPPID = "556642431120194";
 
-_G.socialShareMessage = "I just made totalPoints in Avoid the White Tiles Template! http://bit.ly/1eDPypU";
+_G.socialShareMessage = "I just got XX time in Neoniks: Magic Multiplication Prodigy! http://wwww.neoniks.com";
 
-_G.providerForFullscreenAds = "revmob"; --replace with either chartboost, revmob or admob
-_G.providerForBannerAds = "chartboost"; --replace with either chartboost, revmob or admob
+_G.providerForFullscreenAds = "admob"; --replace with either chartboost, revmob or admob
+_G.providerForBannerAds = "admob"; --replace with either chartboost, revmob or admob
 
 if not ragdogLib.getSaveValue("leaderboardendurance") then
   local leaderboardTable = {
@@ -66,8 +66,8 @@ end
 --IF YOU WANT TO USE ADMOB, MAKE SURE TO TAKE A LOOK AT THE build.settings FILE AS WELL
 
 local activeAdsProviders = {
-  ["Android"] = {"revmob", "chartboost"}, -- replace revmob or chartboost with admob to ensure admob implementation
-  ["iPhone OS"] = {"revmob", "chartboost"} -- replace revmob or chartboost with admob to ensure admob implementation
+  ["Android"] = {"revmob", "chartboost", "admob", "vungle", "playhaven"}, -- replace revmob or chartboost with admob to ensure admob implementation
+  ["iPhone OS"] = {"revmob", "chartboost", "admob", "vungle", "playhaven"} -- replace revmob or chartboost with admob to ensure admob implementation
 };
 
 local activeNetworksProviders = {

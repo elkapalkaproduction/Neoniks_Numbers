@@ -48,7 +48,7 @@ _G.offsetDown = 0;
 _G.siteEng = "http://www.neoniks.com";
 _G.siteRus = "http://www.neoniki.ru";
 
---storyboard.gotoScene("LogoNeoniks", "fade");
- storyboard.gotoScene("menuScene", "fade");
+storyboard.gotoScene("LogoNeoniks", "fade");
+--storyboard.gotoScene("menuScene", "fade");
 
 
